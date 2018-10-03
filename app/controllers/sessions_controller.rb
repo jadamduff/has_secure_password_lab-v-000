@@ -5,8 +5,9 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(name: params[:session][:name])
     binding.pry
+    @user = User.find_by(name: params[:session][:name])
+
     if !@user.nil? && !params[:session][:password].empty?
       if @user.authenticate(params[:session][:password])
         session[:user_id] = @user.id
