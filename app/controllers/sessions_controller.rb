@@ -6,9 +6,9 @@ class SessionsController < ApplicationController
 
   def create
     binding.pry
-    @user = User.find_by(name: params[:session][:name])
+    @user = User.find_by(name: params[:user][:name])
 
-    if !@user.nil? && !params[:session][:password].empty?
+    if !@user.nil? && !params[:user][:password].empty?
       if @user.authenticate(params[:session][:password])
         session[:user_id] = @user.id
         redirect_to user_path(@user)
