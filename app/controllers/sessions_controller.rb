@@ -8,8 +8,11 @@ class SessionsController < ApplicationController
     @user = User.find_by(name: params[:name])
     if !@user == nil
       if @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      redirect_to user_path(@user)
+        session[:user_id] = @user.id
+        redirect_to user_path(@user)
+      else
+        redirect_to login_path
+      end
     else
       redirect_to login_path
     end
