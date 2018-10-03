@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    raise params
     @user = User.find_by(name: params[:session][:name])
     if !@user.nil? && !params[:session][:password].empty?
       if @user.authenticate(params[:session][:password])
