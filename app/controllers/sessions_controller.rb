@@ -6,9 +6,13 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(name: params[:name])
-      redirect_to login_path unless (!@user.empty? || !@user.nil?) && @user.authenticate(params[:password])
+    if !@user.nil?
+      redirect_to login_path unless @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect_to user_path(@user)
+    else
+      redirect_to login_path
+    end
   end
 
 end
